@@ -160,6 +160,6 @@ fixtures
 app/static/uploads/request
 selenium_drivers/*
 
-app/samples/**
-
 logs
+
+database.db
