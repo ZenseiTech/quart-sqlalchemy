@@ -1,4 +1,6 @@
-#!/home/zensei/Projects/Python/flask-sqlalchemy3/.venv/bin/python3
+#!/bin/sh
+'''exec' "/media/zensei/My Passport/Zensei/Projects/Python/quart-sqlalchemy3/.venv/bin/python3.10" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys

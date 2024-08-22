@@ -1,7 +1,3 @@
 #!/bin/bash
 
-export FLASK_APP=app
-export FLASK_ENV=development
-
-# flask run --debug
-flask run
+hypercorn app_quart:app

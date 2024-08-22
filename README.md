@@ -1,15 +1,7 @@
-#flask run
+### To run Quart(Flask competitor of FastApi) with Hypercorn
 
-# for external connection
+https://quart.palletsprojects.com/en/latest/
 
-#flask run --host=0.0.0.0
+https://gitlab.com/pgjones/hypercorn
 
-# run in different port
-
-#flask run -p 5001
-
-flask run --debug
-
-# To remove all packages from pip
-
-pip freeze | xargs pip uninstall -y
+hypercorn app_quart:app
