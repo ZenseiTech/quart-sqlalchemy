@@ -98,37 +98,34 @@ async def post(post_id):
     with db.bind.Session() as session:
         stmt = sa.select(Post).where(Post.id == post_id)
         post = session.scalars(stmt).one()
-        print(str(post.comments))
         if request.method == 'POST':
             content=(await request.form)['content']
-            print("Content =====> " + content)
             comment = Comment(content=content, post_id=post_id)
             session.add(comment)
             session.commit()
             return redirect(url_for('post', post_id=post_id))
 
-    return await render_template('post.html', post=post)
+        return await render_template('post.html', post=post)
 
 
 @app.route('/comments/')
 async def comments():
     with db.bind.Session() as session:
-        rows = session.query(Comment).all()
-        comments = []
-        for row in rows:
-            comment = Comment(id=row.id, content=row.content)
-            comments.append(comment)
+        stmt = sa.select(Comment)
+        comments = session.scalars(stmt).fetchall()
         
-    return await render_template('comments.html', comments=comments)
+        return await render_template('comments.html', comments=comments)
 
 
 @app.post('/comments/<int:comment_id>/delete')
 async def delete_comment(comment_id):
-    comment = Comment.query.get_or_404(comment_id)
-    post_id = comment.post.id
-    db.session.delete(comment)
-    db.session.commit()
-    return redirect(url_for('post', post_id=post_id))
+    with db.bind.Session() as session:
+        stmt = sa.select(Comment).where(Comment.id == comment_id)
+        comment = session.scalars(stmt).one()
+        post_id = comment.post.id
+        session.delete(comment)
+        session.commit()
+        return redirect(url_for('post', post_id=post_id))
 
 
 if __name__ == "__main__":

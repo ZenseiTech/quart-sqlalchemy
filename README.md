@@ -1,5 +1,3 @@
-## Unable to get this to work ...
-
 ### To run Quart(Flask competitor of FastApi) with Hypercorn
 
 https://quart.palletsprojects.com/en/latest/
